@@ -244,8 +244,7 @@ function copyTextToClipboard(text) {
 
   document.execCommand('copy');
   //alert('You text was copied! Ready to paste!\n\nThanks for using our tool!\n- AlonsoAliaga');
-  
-  alertCopied();
+
   document.body.removeChild(textArea);
 }
 // --- Event Listeners ---
