@@ -114,11 +114,13 @@ const fetchImages = async () => {
 
 const uploadFiles = async (files) => {
     if (!files || files.length === 0) return;
+    console.log(`Uploading ${files.length} files..`)
     dashboardErrorElem.classList.add('hidden');
 
     const formData = new FormData();
     for (const file of files) formData.append('images', file);
 
+    console.log(`Uploading`,formData)
     try {
         await fetchData(`${API_BASE_URL}/upload`, { method: 'POST', body: formData, headers: {} }); 
         await fetchImages();
