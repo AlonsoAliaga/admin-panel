@@ -1,6 +1,6 @@
 // script.js
-const API_BASE_URL = 'https://alonsoapi.discloud.app/api'; 
-const IMAGE_SERVE_URL = 'https://alonsoapi.discloud.app/public/images';
+const API_BASE_URL = 'https://alonsoapi.discloud.app/api'; // Assuming your backend is deployed here
+const IMAGE_SERVE_URL = 'https://alonsoapi.discloud.app/public/images'; // Assuming your backend is deployed here
 
 // --- DOM Elements ---
 const loginSection = document.getElementById('login-section');
@@ -38,8 +38,7 @@ const checkAuth = async (token) => {
         return false;
     }
     try {
-        // Use Bearer token for API calls
-        const response = await fetch(`https://alonsoapi.discloud.app/api/images`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch(`${API_BASE_URL}/images`, { headers: { 'Authorization': `Bearer ${token}` } });
         if (response.ok) {
             setAuthUI(true);
             return true;
@@ -65,7 +64,8 @@ const setAuthUI = (isAuthenticated) => {
         loginSection.classList.remove('hidden');
         dashboardSection.classList.add('hidden');
         loginErrorElem.classList.add('hidden');
-        tokenInput.value = localStorage.getItem('adminToken') || ''; // Pre-fill if token exists
+        // No longer pre-fill tokenInput.value here, as it's not displayed in HTML
+        // User will type it in manually the first time or if localStorage cleared.
     }
 };
 
@@ -76,9 +76,9 @@ const fetchData = async (url, options = {}) => {
         const response = await fetch(url, {
             ...options,
             headers: {
-                'Authorization': `Bearer ${token}`, // Ensure Bearer token is sent
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': options.method === 'PUT' || options.method === 'POST' ? 'application/json' : undefined,
-                ...options.headers, // Allow overriding headers if necessary (e.g., for FormData)
+                ...options.headers,
             }
         });
         if (!response.ok) {
@@ -90,14 +90,14 @@ const fetchData = async (url, options = {}) => {
         console.error('API call error:', error);
         dashboardErrorElem.textContent = `Error: ${error.message}`;
         dashboardErrorElem.classList.remove('hidden');
-        throw error; // Re-throw to be caught by specific handlers
+        throw error;
     }
 };
 
 const fetchImages = async () => {
     loadingMessage.classList.remove('hidden');
     noImagesMessage.classList.add('hidden');
-    imagesGrid.innerHTML = ''; // Clear existing images
+    imagesGrid.innerHTML = '';
     dashboardErrorElem.classList.add('hidden');
     try {
         const images = await fetchData(`${API_BASE_URL}/images`);
@@ -119,8 +119,6 @@ const uploadFiles = async (files) => {
     for (const file of files) formData.append('images', file);
 
     try {
-        // For FormData, Fetch API automatically sets Content-Type to multipart/form-data,
-        // so we don't manually set 'Content-Type' header here.
         await fetchData(`${API_BASE_URL}/upload`, { method: 'POST', body: formData, headers: {} }); 
         await fetchImages();
         singleUploadInput.value = '';
@@ -147,9 +145,8 @@ const renameImage = async (imageId, currentOriginalName) => {
     currentImageIdForRename = imageId;
     modalRenameTitle.textContent = `Rename: "${currentOriginalName}"`;
     newFilenameInput.value = currentOriginalName;
-    renameModal.style.display = 'flex'; // Show modal
+    renameModal.style.display = 'flex';
 
-    // Listen for save/cancel actions inside the modal
     modalSaveRenameButton.onclick = async () => {
         const newName = newFilenameInput.value.trim();
         if (!newName || newName === currentOriginalName) {
@@ -164,7 +161,7 @@ const renameImage = async (imageId, currentOriginalName) => {
                 method: 'PUT',
                 body: JSON.stringify({ newOriginalFilename: newName })
             });
-            await fetchImages(); // Refresh dashboard
+            await fetchImages();
             closeRenameModal();
         } catch (error) {
             modalRenameErrorElem.textContent = `Rename failed: ${error.message}`;
@@ -180,7 +177,7 @@ const renameImage = async (imageId, currentOriginalName) => {
 const closeRenameModal = () => {
     renameModal.style.display = 'none';
     currentImageIdForRename = null;
-    newFilenameInput.value = ''; // Clear input
+    newFilenameInput.value = '';
 };
 
 
