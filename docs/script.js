@@ -73,15 +73,19 @@ const setAuthUI = (isAuthenticated) => {
 const fetchData = async (url, options = {}) => {
     try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch(url, {
+        let object = {
             ...options,
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': options.method === 'PUT' || options.method === 'POST' ? 'application/json' : undefined,
+                //'Content-Type': options.method === 'PUT' || options.method === 'POST' ? 'application/json' : undefined,
                 'Access-Control-Allow-Origin': `*`,
                 ...options.headers,
             }
-        });
+        };
+        if(!url.includes("/upload")) {
+            object.headers['Content-Type'] = options.method === 'PUT' || options.method === 'POST' ? 'application/json' : undefined;
+        }
+        const response = await fetch(url, object);
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Request failed: ${response.status} ${response.statusText} - ${errorText}`);
