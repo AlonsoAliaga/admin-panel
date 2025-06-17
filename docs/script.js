@@ -38,7 +38,7 @@ const checkAuth = async (token) => {
         return false;
     }
     try {
-        const response = await fetch(`${API_BASE_URL}/images`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch(`${API_BASE_URL}/images`, { headers: { 'Authorization': `Bearer ${token}`,'Access-Control-Allow-Origin': `*` } });
         if (response.ok) {
             setAuthUI(true);
             return true;
