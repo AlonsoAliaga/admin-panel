@@ -221,7 +221,7 @@ const addImageCard = (image) => {
         </div>
         <div style="margin-top: 6px; !important" class="flex flex-wrap gap-3 justify-center mt-auto w-full">
             <button data-id="${image.id}" data-name="${image.original_filename}" 
-                    oncontextmenu="(()=>window.open('${imageLink}','_blank'))() return false;"
+                    oncontextmenu="(()=>window.open('${imageLink}','_blank'))(); return false;"
                     onclick="copyTextToClipboard('${imageLink}')"
                     class="flex-1 btn-gradient text-white text-sm px-4 py-2 rounded-lg shadow-md transition duration-200">
                 Copy image link 🔗
