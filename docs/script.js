@@ -39,7 +39,7 @@ const checkAuth = async (token) => {
     }
     try {
         // Use Bearer token for API calls
-        const response = await fetch(`${API_BASE_URL}/images`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch(`https://alonsoapi.discloud.app/api/images`, { headers: { 'Authorization': `Bearer ${token}` } });
         if (response.ok) {
             setAuthUI(true);
             return true;
