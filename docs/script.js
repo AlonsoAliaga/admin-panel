@@ -1,5 +1,5 @@
 // script.js
-const API_BASE_URL = 'https://alonsoapi.discloud.app/api';
+const API_BASE_URL = 'https://alonsoapi.discloud.app/api'; 
 const IMAGE_SERVE_URL = 'https://alonsoapi.discloud.app/public/images';
 
 // --- DOM Elements ---
