@@ -78,6 +78,7 @@ const fetchData = async (url, options = {}) => {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': options.method === 'PUT' || options.method === 'POST' ? 'application/json' : undefined,
+                'Access-Control-Allow-Origin': `*`,
                 ...options.headers,
             }
         });
