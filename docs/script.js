@@ -218,10 +218,32 @@ const addImageCard = (image) => {
                 Delete
             </button>
         </div>
+        <div style="margin-top: 6px; !important" class="flex flex-wrap gap-3 justify-center mt-auto w-full">
+            <button data-action="rename" data-id="${image.id}" data-name="${image.original_filename}" onclick="copyTextToClipboard('${IMAGE_SERVE_URL}/${image.name}')"
+                    class="flex-1 btn-gradient text-white text-sm px-4 py-2 rounded-lg shadow-md transition duration-200">
+                Copy image link 🔗
+            </button>
+        </div>
     `;
     imagesGrid.appendChild(card);
 };
+function copyTextToClipboard(text) {
+  let textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.bottom= 0;
+  textArea.style.left= 0;
 
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  document.execCommand('copy');
+  //alert('You text was copied! Ready to paste!\n\nThanks for using our tool!\n- AlonsoAliaga');
+  
+  alertCopied();
+  document.body.removeChild(textArea);
+}
 // --- Event Listeners ---
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
