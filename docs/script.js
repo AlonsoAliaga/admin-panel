@@ -1,6 +1,6 @@
 // script.js
-const API_BASE_URL = 'https://corsproxy.io/?url=https://alonsoapi.discloud.app/api'; // Assuming your backend is deployed here
-const IMAGE_SERVE_URL = 'https://corsproxy.io/?url=https://alonsoapi.discloud.app/public/images'; // Assuming your backend is deployed here
+const API_BASE_URL = 'https://alonsoapi.discloud.app/api'; // Assuming your backend is deployed here
+const IMAGE_SERVE_URL = 'https://alonsoapi.discloud.app/public/images'; // Assuming your backend is deployed here
 
 // --- DOM Elements ---
 const loginSection = document.getElementById('login-section');
