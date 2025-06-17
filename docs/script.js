@@ -122,9 +122,12 @@ const uploadFiles = async (files) => {
         console.log(`Apending ${file.name} for formData`)
         formData.append('images', file);
     }
+    for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+    }
 
     console.log(`formData`,formData)
-    console.log(`formData.keys():`,formData.keys())
+    console.log(`formData.keys():`,[...formData.keys()])
     try {
         await fetchData(`${API_BASE_URL}/upload`, { method: 'POST', body: formData, headers: {} }); 
         await fetchImages();
