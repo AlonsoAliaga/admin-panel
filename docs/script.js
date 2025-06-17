@@ -1,7 +1,6 @@
 // script.js
 const API_BASE_URL = 'http://alonsoapi.discloud.app/api';
 const IMAGE_SERVE_URL = 'http://alonsoapi.discloud.app/public/images';
-const AUTH_TOKEN = 'your_secure_admin_token_123'; // <<<--- !!! CHANGE THIS !!! --->>>
 
 // --- DOM Elements ---
 const loginSection = document.getElementById('login-section');
