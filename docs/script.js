@@ -1,6 +1,6 @@
 // script.js
-const API_BASE_URL = 'http://alonsoapi.discloud.app/api';
-const IMAGE_SERVE_URL = 'http://alonsoapi.discloud.app/public/images';
+const API_BASE_URL = 'https://alonsoapi.discloud.app/api';
+const IMAGE_SERVE_URL = 'https://alonsoapi.discloud.app/public/images';
 
 // --- DOM Elements ---
 const loginSection = document.getElementById('login-section');
