@@ -203,7 +203,7 @@ const addImageCard = (image) => {
         <img src="${IMAGE_SERVE_URL}/${image.name}" alt="${image.name}" 
              style="margin-bottom: 6px; !important" class="w-full h-40 object-contain mb-5 rounded-md border border-gray-700 bg-gray-900" 
              onerror="this.onerror=null;this.src='${IMAGE_SERVE_URL}/default_image.png';">
-        <p style="margin-bottom: 6px;" class="text-lg font-medium text-gray-100 mb-3 truncate w-full text-center" title="${image.name}">
+        <p style="margin-bottom: 6px; white-space: normal; overflow-wrap: break-word;" class="text-lg font-medium text-gray-100 mb-3 truncate w-full text-center" title="${image.name}">
             ${image.name}
         </p>
         <p class="text-xs text-gray-400 mb-4" style="margin-bottom: 5px !important;">ID: ${image.id}</p>
@@ -219,7 +219,7 @@ const addImageCard = (image) => {
             </button>
         </div>
         <div style="margin-top: 6px; !important" class="flex flex-wrap gap-3 justify-center mt-auto w-full">
-            <button data-action="rename" data-id="${image.id}" data-name="${image.original_filename}" onclick="copyTextToClipboard('${IMAGE_SERVE_URL}/${image.name}')"
+            <button data-id="${image.id}" data-name="${image.original_filename}" onclick="copyTextToClipboard('${IMAGE_SERVE_URL}/${image.name}')"
                     class="flex-1 btn-gradient text-white text-sm px-4 py-2 rounded-lg shadow-md transition duration-200">
                 Copy image link 🔗
             </button>
