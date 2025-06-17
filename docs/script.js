@@ -152,19 +152,19 @@ const deleteImage = async (imageId) => {
     } catch (error) { /* Handled by fetchData */ }
 };
 
-const renameImage = async (imageId, currentOriginalName) => {
+const renameImage = async (imageId, name) => {
     dashboardErrorElem.classList.add('hidden');
     modalRenameErrorElem.classList.add('hidden');
     modalSavingMessage.classList.add('hidden');
 
     currentImageIdForRename = imageId;
-    modalRenameTitle.textContent = `Rename: "${currentOriginalName}"`;
-    newFilenameInput.value = currentOriginalName;
+    modalRenameTitle.textContent = `Rename: "${name}"`;
+    newFilenameInput.value = name;
     renameModal.style.display = 'flex';
 
     modalSaveRenameButton.onclick = async () => {
         const newName = newFilenameInput.value.trim();
-        if (!newName || newName === currentOriginalName) {
+        if (!newName || newName === name) {
             modalRenameErrorElem.textContent = 'New name is required and must be different.';
             modalRenameErrorElem.classList.remove('hidden');
             return;
@@ -211,7 +211,7 @@ const addImageCard = (image) => {
         <p class="text-xs text-gray-400 mb-4" style="margin-bottom: 5px !important;">ID: ${image.id}</p>
         <p class="text-xs text-gray-400 mb-4" style="margin-bottom: 5px !important;">Created at: ${image.created_at}</p>
         <div style="margin-top: 6px; !important" class="flex flex-wrap gap-3 justify-center mt-auto w-full">
-            <button data-action="rename" data-id="${image.id}" data-name="${image.original_filename}" 
+            <button data-action="rename" data-id="${image.id}" data-name="${image.name}" 
                     class="flex-1 btn-gradient text-white text-sm px-4 py-2 rounded-lg shadow-md transition duration-200">
                 Rename
             </button>
@@ -221,7 +221,7 @@ const addImageCard = (image) => {
             </button>
         </div>
         <div style="margin-top: 6px; !important" class="flex flex-wrap gap-3 justify-center mt-auto w-full">
-            <button data-id="${image.id}" data-name="${image.original_filename}" 
+            <button data-id="${image.id}" data-name="${image.name}" 
                     oncontextmenu="(()=>window.open('${imageLink}','_blank'))(); return false;"
                     onclick="copyTextToClipboard('${imageLink}')"
                     class="flex-1 btn-gradient text-white text-sm px-4 py-2 rounded-lg shadow-md transition duration-200">
